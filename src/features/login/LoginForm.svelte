@@ -1,5 +1,11 @@
 <script>
   import Button from "../../shared/components/Button.svelte";
+
+  const AUTH_URL = import.meta.env.VITE_AUTH_URL;
+
+  export function login() {
+    window.location.href = AUTH_URL;
+  }
 </script>
 
 <section>
@@ -7,7 +13,9 @@
     <h2 class="title">Seja Bem-Vindo</h2>
     <div class="btns-wrapper">
       <span>Entrar com</span>
-      <Button class="bg">
+      <Button class="bg"
+        on:click="{login}"
+      >
         Google
       </Button>
     </div>

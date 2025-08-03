@@ -44,7 +44,14 @@
   }
 
   a{
-    color: #0c84d4;
+    color: #68b2e4;
+    text-decoration: none;
+    transition: all 0.2s;
   }
+  
+  a:hover{
+    color:var(--white);
+  }
+
 
 </style>
