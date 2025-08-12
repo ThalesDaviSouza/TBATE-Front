@@ -15,8 +15,8 @@
   #container {
     width: 100vw;
     height: 100vh;
-    background-color: #24242d;
-    color: #f8faff;
+    background-color: var(--black-bg);
+    color: var(--gray);
 
     grid-template-rows: 1fr 60px;
     grid-template-columns: auto;
@@ -44,9 +44,10 @@
   }
 
   a{
-    color: #68b2e4;
+    color: var(--light-blue);
     text-decoration: none;
     transition: all 0.2s;
+    font-weight: bold;
   }
   
   a:hover{

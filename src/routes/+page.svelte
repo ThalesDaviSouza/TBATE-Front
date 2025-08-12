@@ -54,7 +54,7 @@
 
   #card-login{
     background-color: var(--white);
-    color: var(--dark-gray-blue);
+    color: var(--black);
     height: 450px;
     display: flex;
     justify-content: space-evenly;

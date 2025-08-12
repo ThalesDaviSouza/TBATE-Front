@@ -1,1 +1,6 @@
-<h3>Selecione uma ficha ou crie uma nova</h3>
+<script>
+  import SheetSelector from "../../features/select-sheet/SheetSelector.svelte";
+
+</script>
+
+<SheetSelector></SheetSelector>
