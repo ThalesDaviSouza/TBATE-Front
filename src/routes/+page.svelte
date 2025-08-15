@@ -1,25 +1,11 @@
 <script lang="ts">
   import { goto } from '$app/navigation';
-  import { onMount } from 'svelte';
   import Button from '../shared/components/Button.svelte'
-  import { getNewAcessToken, verifyIsAuthenticated } from '../shared/services/authService';
 
   function navigateToLoginPage(){
     goto('/login');
   }
 
-  onMount(async() => {
-    // TODO: Isolar a lógica de refresh Token
-    let authenticated: boolean = await verifyIsAuthenticated();
-
-    if(!authenticated){ 
-      authenticated = await getNewAcessToken();
-    }
-    
-    if(authenticated)
-      goto('/sheets')
-
-  })
 </script>
 
 <div id="container">

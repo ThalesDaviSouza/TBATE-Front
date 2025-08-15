@@ -1,6 +1,6 @@
-import { writable } from "svelte/store";
-
-const API_URL =  import.meta.env.VITE_API_URL;
+import { getAuthorized } from "./handleRequestService";
+import { post } from "./requestBaseService";
+import type { RequestEvent } from "@sveltejs/kit";
 
 interface userInfo {
   user: {
@@ -10,19 +10,25 @@ interface userInfo {
   }
 };
 
-export const userStore = writable<userInfo | null>(null);
-
-export async function verifyIsAuthenticated(): Promise<boolean> {
+export async function verifyIsAuthenticated(event: RequestEvent): Promise<boolean> {
   try{
-    const response = await fetch(`${API_URL}/users/me`, {
-      credentials: 'include',
-      method: 'GET'
-    });
+    const token = event.cookies.get('token');
+    
+    if(!token)
+      return false;
+
+    const response = await getAuthorized('/users/me', token);
 
     if(response.ok){
       const userInfo: userInfo = await response.json(); 
-      userStore.set(userInfo);
-      localStorage.setItem('userId', userInfo.user.id);
+
+      event.cookies.set('userId', userInfo.user.id, {
+        httpOnly: true,
+        path: '/',
+        sameSite: 'strict',
+        secure: true,
+        maxAge: 60 * 10 // 10 min
+      });
     }
 
     return response.ok;
@@ -32,29 +38,34 @@ export async function verifyIsAuthenticated(): Promise<boolean> {
   }
 }
 
-export async function getNewAcessToken(): Promise<boolean> {
+export async function getNewAcessToken(event: RequestEvent): Promise<boolean> {
   try{
-    const userId = localStorage.getItem('userId');
+    const userId = event.cookies.get('userId');
+
     if(!userId)
       return false;
 
-    const response = await fetch(`${API_URL}/users/refresh`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userId)
-    });
+    const response = await post('/users/refresh', JSON.stringify(userId));
 
-    if(!response.ok)
-      localStorage.removeItem('userId');
+    if(!response.ok){
+      event.cookies.delete('userId', { path: '/' });
+      return response.ok;
+    }
+
+    const body = await response.json();
+
+    event.cookies.set('token', body.token, {
+       httpOnly: true,
+        path: '/',
+        sameSite: 'strict',
+        secure: true,
+        maxAge: 60 * 10 // 10 min
+    })
     
     return response.ok;
   }
   catch{
-    console.error("Usuário não está logado");
-    localStorage.removeItem('userId');
-    
+    event.cookies.delete('userId', { path: '/' });
     return false;
   }
 }
