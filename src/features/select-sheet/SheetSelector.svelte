@@ -1,15 +1,13 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import Button from "../../shared/components/Button.svelte";
-  import { getSheets } from "./services/sheetsService";
   import SheetCard from "./SheetCard.svelte";
   import SheetCreatorModal from "./SheetCreatorModal.svelte";
-  import { showModal } from "./stores/createSheetStore";
+  import { openModal, refreshSheets, sheetsStore } from "./stores/createSheetStore";
 
-  let sheets = $state(getSheets());
-
-  function openModal(){
-    showModal.set(true);
-  }
+  onMount(async () => {
+    await refreshSheets();
+  })
 
 </script>
 
@@ -24,13 +22,13 @@
       >
         Criar Ficha
       </Button>
-      {#await sheets}
+      {#await $sheetsStore}
         <span>Carregando...</span>
       {:then sheets} 
-        {#if sheets.length == 0}
+        {#if sheets?.length == 0}
           <span>Sem fichas</span>
         {:else}
-          {#each sheets as sheet (sheet.characterName)}
+          {#each sheets as sheet, index (index)}
             <SheetCard {sheet}></SheetCard>
           {/each}
         {/if}

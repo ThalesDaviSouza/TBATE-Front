@@ -1,3 +1,4 @@
 export type ResumeSheet = {
-  characterName: string
+  name: string,
+  userId: string
 }

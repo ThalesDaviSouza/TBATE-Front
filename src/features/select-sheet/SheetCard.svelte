@@ -9,7 +9,7 @@
 </script>
 
 <div class="sheet-card">
-  <span>{sheet.characterName}</span>
+  <span>{sheet.name}</span>
 </div>
 
 

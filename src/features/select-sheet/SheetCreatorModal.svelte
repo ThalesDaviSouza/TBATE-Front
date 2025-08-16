@@ -1,10 +1,20 @@
 <script>
   import Button from "../../shared/components/Button.svelte";
   import Modal from "../../shared/components/Modal.svelte";
+  import { criarFicha } from "./services/sheetsService";
 
-  import { closeModal, showModal } from "./stores/createSheetStore";
+  import { closeModal, refreshSheets, showModal } from "./stores/createSheetStore";
 
   let characterName = $state('');
+
+  async function criar(){
+    let criado = await criarFicha(characterName);
+
+    if(criado){
+      await refreshSheets();
+      closeModal();
+    }
+  }
 
 </script>
 
@@ -29,6 +39,7 @@
         Cancelar
       </Button>
       <Button
+        on:click={criar}
         class="bgx br-10 purple"
       >
         Criar
