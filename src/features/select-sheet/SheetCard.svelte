@@ -1,6 +1,15 @@
+<script lang="ts">
+  import type { ResumeSheet } from "./model/resumeSheet";
+
+  type Props = {
+    sheet: ResumeSheet
+  }
+
+  let { sheet }: Props = $props();
+</script>
 
 <div class="sheet-card">
-  <span>Nome do personagem</span>
+  <span>{sheet.characterName}</span>
 </div>
 
 
@@ -24,6 +33,7 @@
 
   .sheet-card:hover {
     font-weight: bold;
+    background-color: var(--light-black);
     color: var(--white);
   }
 </style>

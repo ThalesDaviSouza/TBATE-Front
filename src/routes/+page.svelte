@@ -22,7 +22,7 @@
     <h2>
       Deseja começar a se aventurar nesse mundo?
     </h2>
-    <Button on:click={navigateToLoginPage} class="width-100">
+    <Button on:click={navigateToLoginPage} class="width-100 bg">
       Entrar
     </Button>
   </div>

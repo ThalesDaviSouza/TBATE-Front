@@ -12,7 +12,7 @@
   <div id="container">
     <h2 class="title">Seja Bem-Vindo</h2>
     <div class="btns-wrapper">
-      <span>Entrar com</span>
+      <span>Deseja entrar com:</span>
       <Button class="bg"
         on:click="{login}"
       >
@@ -37,15 +37,15 @@
     grid-template-rows: auto 1fr;
     
     background-color: var(--white);
-    color: var(--dark-gray-blue);
+    color: var(--black);
     padding: 10px 20px;
     
     border-radius: 20px;
   }
 
   .btns-wrapper{
-    margin-top: 40px;
-    gap: 15px;
+    margin-top: 25px;
+    gap: 30px;
     display: flex;
     flex-direction: column;
   }

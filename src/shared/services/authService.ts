@@ -55,11 +55,11 @@ export async function getNewAcessToken(event: RequestEvent): Promise<boolean> {
     const body = await response.json();
 
     event.cookies.set('token', body.token, {
-       httpOnly: true,
-        path: '/',
-        sameSite: 'strict',
-        secure: true,
-        maxAge: 60 * 10 // 10 min
+      httpOnly: true,
+      path: '/',
+      sameSite: 'strict',
+      secure: true,
+      maxAge: 60 * 10 // 10 min
     })
     
     return response.ok;
