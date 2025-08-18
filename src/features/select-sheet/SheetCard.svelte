@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import type { ResumeSheet } from "./model/resumeSheet";
 
   type Props = {
@@ -6,9 +7,19 @@
   }
 
   let { sheet }: Props = $props();
+
+  function openSheet() {
+    goto(`/sheet/${sheet.id}`)
+  }
 </script>
 
-<div class="sheet-card">
+<div 
+  class="sheet-card" 
+  onclick={openSheet}
+  role="button"
+  tabindex="0"
+  onkeydown={() => {}}
+>
   <span>{sheet.name}</span>
 </div>
 
