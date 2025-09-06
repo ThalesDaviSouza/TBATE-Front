@@ -10,9 +10,15 @@
 
 </script>
 
-<p
+<span
   contenteditable="true"
   oninput={(e: any) => node.value = sanitize(e.target.innerHTML)}
 >
   {@html node.value}
-</p>
+</span>
+
+<style>
+  span{
+    min-width: 20px;
+  }
+</style>

@@ -14,7 +14,14 @@
     <div 
       class="tab"
       class:active={id == selectedTabId.value}
+      role="button"
+      tabindex="0"
       onclick={() => selectedTabId.value = id}
+      onkeydown={(e) => {
+        if(e.key == 'Enter' || e.key == ' '){
+          selectedTabId.value = id
+        }
+      }}
     >
       <span>
         {tab.name}
@@ -33,8 +40,9 @@
   }
 
   #tab-wrapper{
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
+    width: max-content;
   }
 
   .active{

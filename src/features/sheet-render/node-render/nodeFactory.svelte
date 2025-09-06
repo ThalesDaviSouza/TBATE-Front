@@ -1,7 +1,8 @@
 <script lang="ts">
   import { NodeType } from "../model/nodeType";
   import type { SheetNode } from "../model/sheetNode";
-  import TexteNode from "./texteNode.svelte";
+  import ModifierNode from "./modifierNode.svelte";
+  import TextNode from "./textNode.svelte";
 
   type props = {
     node: SheetNode
@@ -12,7 +13,9 @@
 </script>
 
 {#if node.type == NodeType.text}
-  <TexteNode node={node}></TexteNode>
+  <TextNode {node}></TextNode>
+{:else if node.type == NodeType.modifier}
+  <ModifierNode {node}></ModifierNode>
 {:else}
   <p>Tipo de nó não implementado</p>
 {/if}

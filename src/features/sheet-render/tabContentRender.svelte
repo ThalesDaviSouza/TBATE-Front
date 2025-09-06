@@ -9,6 +9,16 @@
   let { content }: props = $props();
 </script>
 
-{#each content as node}
+<div>
+  {#each content as node}
   <NodeFactory {node}></NodeFactory>
-{/each}
+  {/each}
+</div>
+
+<style>
+  div{
+    display: flex;
+    gap: 5px;
+    align-items: baseline;
+  }
+</style>

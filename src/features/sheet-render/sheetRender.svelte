@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Sheet } from "./model/sheet";
+  import { AddTextNode } from "./services/tabService";
   import { CreateSheetStore } from "./stores/sheetStore.svelte";
   import TabContentRender from "./tabContentRender.svelte";
   import TabRender from "./tabRender.svelte";
@@ -14,12 +15,13 @@
 
 </script>
 
-<button onclick={() => console.log(sheet)}>inspect</button>
+<button onclick={() => console.log(sheetStore.sheet)}>inspect</button>
+<button onclick={() => AddTextNode(sheetStore.sheet, 0)}>Text Node</button>
 
 <div>
   <h2>{sheet.charactherName}</h2>
   <p>{sheet.description}</p><br/>
-  
+
   <TabRender tabs={sheet.tabs}></TabRender>
   <TabContentRender content={sheetStore.currentContent}></TabContentRender>
   
