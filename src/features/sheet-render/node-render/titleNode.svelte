@@ -9,14 +9,14 @@
 
 </script>
 
-<p
+<h2
   contenteditable="true"
   bind:textContent={node.value}
 >
-</p>
+</h2>
 
 <style>
-  p {
+  h2 {
     width: 100%;
   }
 </style>

@@ -10,18 +10,27 @@
 </script>
 
 <div id="modifier-wrapper">
+  <span
+    contenteditable="true"
+    bind:textContent={node.name}
+  >
+  </span>
   <input type="number" bind:value={node.value}>
-  <span>{node.name}</span>
 </div>
 
 <style>
+  div{
+    gap: 15px;
+  }
+  
   #modifier-wrapper{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
   }
+
   input {
     text-align: center;
-    width: 50px;
+    width: auto;
   }
 
 </style>
