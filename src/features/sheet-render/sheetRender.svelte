@@ -23,7 +23,11 @@
   <p>{sheet.description}</p><br/>
 
   <TabRender tabs={sheet.tabs}></TabRender>
-  <TabContentRender content={sheetStore.currentContent}></TabContentRender>
+  <TabContentRender 
+    content={sheetStore.currentContent} 
+    sheet={sheetStore.sheet}
+  >
+  </TabContentRender>
   
 </div>
 

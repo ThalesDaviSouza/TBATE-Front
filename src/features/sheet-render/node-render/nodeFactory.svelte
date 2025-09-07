@@ -1,5 +1,6 @@
 <script lang="ts">
   import { NodeType } from "../model/nodeType";
+  import type { Sheet } from "../model/sheet";
   import type { SheetNode } from "../model/sheetNode";
   import ModifierNode from "./modifierNode.svelte";
   import RollBtnNode from "./rollBtnNode.svelte";
@@ -7,10 +8,11 @@
   import TitleNode from "./titleNode.svelte";
 
   type props = {
-    node: SheetNode
+    node: SheetNode,
+    sheet: Sheet
   };
 
-  let { node }: props = $props();
+  let { node, sheet }: props = $props();
 
 </script>
 
@@ -21,7 +23,7 @@
 {:else if node.type == NodeType.title}
   <TitleNode {node}></TitleNode>
 {:else if node.type == NodeType.rollBtn}
-  <RollBtnNode {node}></RollBtnNode>
+  <RollBtnNode {node} {sheet}></RollBtnNode>
 {:else}
   <p>Tipo de nó não implementado</p>
 {/if}

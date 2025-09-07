@@ -1,17 +1,19 @@
 <script lang="ts">
+  import type { Sheet } from "./model/sheet";
   import type { SheetNode } from "./model/sheetNode";
   import NodeFactory from "./node-render/nodeFactory.svelte";
 
   type props = {
-    content: SheetNode[]
+    content: SheetNode[],
+    sheet: Sheet
   };
 
-  let { content }: props = $props();
+  let { content, sheet }: props = $props();
 </script>
 
 <div>
   {#each content as node}
-  <NodeFactory {node}></NodeFactory>
+    <NodeFactory {node} {sheet}></NodeFactory>
   {/each}
 </div>
 

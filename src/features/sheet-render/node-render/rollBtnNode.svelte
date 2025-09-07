@@ -3,12 +3,14 @@
   import Modal from "../../../shared/components/Modal.svelte";
   import type { SheetNode } from "../model/sheetNode";
   import { ReadFormula } from "../../../shared/services/RollFormulaInterpreter/rollFormulaInterpreter";
+  import type { Sheet } from "../model/sheet";
 
   type props = {
-    node: SheetNode
+    node: SheetNode,
+    sheet: Sheet
   };
 
-  let { node }: props = $props();
+  let { node, sheet }: props = $props();
   let showModal = writable(false);
   let input = $state("");
 </script>
@@ -35,7 +37,7 @@
     <input type="text" bind:value={input}>
   {/snippet}
   {#snippet footer()}
-    <button onclick={() => ReadFormula(input)}>Teste</button>
+    <button onclick={() => ReadFormula(input, sheet)}>Teste</button>
   {/snippet}
 </Modal>
 
