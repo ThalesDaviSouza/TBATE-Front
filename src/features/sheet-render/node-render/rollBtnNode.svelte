@@ -2,6 +2,7 @@
   import { writable } from "svelte/store";
   import Modal from "../../../shared/components/Modal.svelte";
   import type { SheetNode } from "../model/sheetNode";
+  import { ReadFormula } from "../../../shared/services/RollFormulaInterpreter/rollFormulaInterpreter";
 
   type props = {
     node: SheetNode
@@ -9,6 +10,7 @@
 
   let { node }: props = $props();
   let showModal = writable(false);
+  let input = $state("");
 </script>
 
 <div id="modifier-wrapper">
@@ -26,8 +28,14 @@
 </div>
 
 <Modal showModal={showModal}>
+  {#snippet header()}
+    <span>Definir a formula:</span>
+  {/snippet}
   {#snippet body()}
-    <span>Definir a formula</span>
+    <input type="text" bind:value={input}>
+  {/snippet}
+  {#snippet footer()}
+    <button onclick={() => ReadFormula(input)}>Teste</button>
   {/snippet}
 </Modal>
 
