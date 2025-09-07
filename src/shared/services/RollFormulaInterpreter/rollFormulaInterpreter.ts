@@ -1,4 +1,7 @@
-import { tokenizer, type Lexer } from "./lexer"
+import { dicesRolled, evaluate } from "./Ast/astEvaluate";
+import { tokenizer, type Lexer } from "./Lexer/lexer"
+import { PrattParser } from "./Parser/parser";
+import { TokenStream } from "./Parser/tokenStream";
 
 export function ReadFormula(source: string){
   let lexer: Lexer = {
@@ -8,7 +11,13 @@ export function ReadFormula(source: string){
   };
 
   tokenizer(lexer);
+  const parser = new PrattParser(new TokenStream(lexer.tokens));
+  const ast = parser.parseExpression();
+  let result = evaluate(ast);
 
   console.log('Source: ', source);
   console.log('Tokens:', lexer.tokens)
+  console.log('Ast:', ast)
+  console.log('Dices rolled:', dicesRolled)
+  console.log('Result:', result)
 }

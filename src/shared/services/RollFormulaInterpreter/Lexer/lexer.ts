@@ -1,6 +1,6 @@
 import { TokenKind, tokenSpecs } from "./tokenKinds"
 
-type Token = {
+export type Token = {
   kind: TokenKind,
   value: string
 }
