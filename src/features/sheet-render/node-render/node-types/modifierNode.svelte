@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { SheetNode } from "../model/sheetNode";
+  import type { SheetNode } from "../../model/sheetNode";
 
   type props = {
     node: SheetNode

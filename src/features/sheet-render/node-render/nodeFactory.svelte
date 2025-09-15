@@ -2,10 +2,10 @@
   import { NodeType } from "../model/nodeType";
   import type { Sheet } from "../model/sheet";
   import type { SheetNode } from "../model/sheetNode";
-  import ModifierNode from "./modifierNode.svelte";
-  import RollBtnNode from "./rollBtnNode.svelte";
-  import TextNode from "./textNode.svelte";
-  import TitleNode from "./titleNode.svelte";
+  import ModifierNode from "./node-types/modifierNode.svelte";
+  import RollBtnNode from "./node-types/rollBtnNode.svelte";
+  import TextNode from "./node-types/textNode.svelte";
+  import TitleNode from "./node-types/titleNode.svelte";
 
   type props = {
     node: SheetNode,

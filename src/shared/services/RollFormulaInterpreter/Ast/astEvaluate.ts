@@ -51,10 +51,9 @@ export function evaluate(expression: Expression, context: Sheet): number | numbe
       return maxs;
 
     case ExpressionType.AttributeReference: 
-      console.log('sheet', context);
       let result = findAttribute(context, expression.target);
-      console.log('target value:', result);
-      if(!result)
+
+      if(result == null)
         throw new Error("Falha ao localizar: " + expression.target);
 
       return result;
@@ -91,6 +90,7 @@ function realizeOperation(tokenKind: TokenKind, left: number, right: number){
 function findAttribute(context: Sheet, target: string) : number | null{
   for(let tab of context.tabs){
     for(let node of tab.nodes){
+      // TODO: adicionar rollBtn como targets
       if(node.type != NodeType.modifier)
         continue;
       

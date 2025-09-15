@@ -36,7 +36,10 @@
     padding: 5px 10px;
     border-radius: 7px 7px 0 0;
     cursor: pointer;
-    transition: all ease-in-out 0.125s;
+    transition: all ease-in-out 0.25s;
+  }
+  .tab:hover {
+    background-color: var(--light-black);
   }
 
   #tab-wrapper{

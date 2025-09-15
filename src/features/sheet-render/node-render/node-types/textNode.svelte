@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { SheetNode } from "../model/sheetNode";
+  import type { SheetNode } from "../../model/sheetNode";
 
   type props = {
     node: SheetNode
@@ -9,14 +9,14 @@
 
 </script>
 
-<h2
+<p
   contenteditable="true"
   bind:textContent={node.value}
 >
-</h2>
+</p>
 
 <style>
-  h2 {
+  p {
     width: 100%;
   }
 </style>
