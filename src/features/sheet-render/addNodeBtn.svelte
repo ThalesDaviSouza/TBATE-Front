@@ -13,7 +13,7 @@
   let { index, context }: props = $props();
 
   let showPopover = $state(false);
-  let anchor; // referência ao botão clicado
+  let anchor = $state(); // referência ao botão clicado
 
   function togglePopover(event: any) {
     anchor = event.currentTarget;
@@ -36,7 +36,7 @@
 </button>
 
 <Popover 
-  open={showPopover}
+  isOpen={showPopover}
   onClose={() => {showPopover = false}}
   anchor={anchor}
 >

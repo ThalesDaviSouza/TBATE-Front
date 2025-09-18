@@ -90,4 +90,8 @@
     justify-content: start;
   }
 
+  .color-red{
+    color: var(--red);
+  }
+
 </style>

@@ -2,6 +2,8 @@
   import { tick } from "svelte";
   import type { Tab } from "./model/tab";
   import type { SheetStore } from "./stores/sheetStore.svelte";
+  import Popover from "../../shared/components/Popover.svelte";
+  import Button from "../../shared/components/Button.svelte";
 
   type props = {
     context: SheetStore,
@@ -12,6 +14,8 @@
   let { context, id, tab }: props = $props();
 
   let isEditing = $state(false);
+  let anchor = $state();
+  let showPopover = $state(false);
 
   async function handleDbClick(e:any){
     e.preventDefault();
@@ -23,6 +27,16 @@
 
   function handleBlur(){
     isEditing = false;
+  }
+
+  function handleRightClick(e: any){
+    e.preventDefault();
+    anchor = e.currentTarget;
+    showPopover = true;
+  }
+
+  function deleteTab(){
+    context.RemoveTab(id)
   }
 
 </script>
@@ -39,6 +53,9 @@
     }
   }}
   ondblclick={handleDbClick}
+  oncontextmenu={handleRightClick}
+
+  bind:this={anchor}
 >
   {#if isEditing}
     <input 
@@ -58,6 +75,23 @@
     </span>
   {/if}
 </div>
+
+{#if anchor}
+  <Popover
+    anchor={anchor}
+    isOpen={showPopover}
+    onClose={() => {showPopover = false}}
+  >
+    {#snippet body()}
+      <Button 
+        class="transparent align-start color-red"
+        on:click={deleteTab}
+      >
+        Deletar
+      </Button>
+    {/snippet}
+  </Popover>
+{/if}
 
 <style>
   .tab {

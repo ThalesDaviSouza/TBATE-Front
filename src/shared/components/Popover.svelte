@@ -1,13 +1,13 @@
 <script lang="ts">
   
   type props = {
-    open: boolean,
+    isOpen: boolean,
     onClose: () => void,
     body: any,
     anchor: any
   };
 
-  let { body, open, onClose, anchor }: props = $props();
+  let { body, isOpen, onClose, anchor }: props = $props();
 
   function handleClickOutside(e: any){
     if(!e.target.closest(".popover-content"))
@@ -17,12 +17,12 @@
   }
 
   let rect = $derived(anchor.getBoundingClientRect());
-  let popoverStyle = $derived(`top:${rect.bottom - 25}px;left:${rect.left + 30}px;position:absolute;`);
+  let popoverStyle = $derived(`top:${rect.bottom - rect.height/2}px;left:${rect.left + rect.width - 10}px;position:absolute;`);
 
-
+ 
 </script>
 
-{#if open}
+{#if isOpen}
   <div
     class="popover-backdrop"
     onclick={handleClickOutside}

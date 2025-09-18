@@ -9,6 +9,7 @@ export type SheetStore = {
   selectedTabId: number,
   AddNodeInCurrentTab: (type: NodeType, offset: number) => void
   AddTab: () => void
+  RemoveTab: (tabIndex: number) => void
 }
 
 export function CreateSheetStore(sheetInput: Sheet): SheetStore {
@@ -24,6 +25,13 @@ export function CreateSheetStore(sheetInput: Sheet): SheetStore {
   function AddTab(){
     sheet.tabs.push({name:"Nova Tab", nodes: []})
   }
+  
+  function RemoveTab(tabIndex: number){
+    if(sheet.tabs.length == 1){
+      throw new Error('Não pode ter menos de 1 tab na ficha')
+    }
+    sheet.tabs.splice(tabIndex, 1);
+  }
 
   return {
     sheet,
@@ -31,6 +39,7 @@ export function CreateSheetStore(sheetInput: Sheet): SheetStore {
     get selectedTabId() { return selectedTabId }, 
     set selectedTabId(v: number) { selectedTabId = v },
     AddNodeInCurrentTab,
-    AddTab
+    AddTab,
+    RemoveTab
   }
 }
