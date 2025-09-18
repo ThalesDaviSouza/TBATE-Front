@@ -16,7 +16,7 @@
 </script>
 
 <button onclick={() => console.log(sheetStore.sheet)}>inspect</button>
-<button onclick={() => AddTextNode(sheetStore.sheet, 0)}>Text Node</button>
+<!-- <button onclick={() => AddTextNode(sheetStore.sheet, 0)}>Text Node</button> -->
 
 <div>
   <h2>{sheet.charactherName}</h2>
@@ -24,6 +24,7 @@
 
   <TabRender tabs={sheet.tabs}></TabRender>
   <TabContentRender 
+    context={sheetStore}
     content={sheetStore.currentContent} 
     sheet={sheetStore.sheet}
   >

@@ -1,19 +1,28 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
   import Popover from "../../shared/components/Popover.svelte";
+  import Button from "../../shared/components/Button.svelte";
+  import type { SheetStore } from "./stores/sheetStore.svelte";
+  import { NodeType } from "./model/nodeType";
 
-  let { index } = $props();
+  type props = {
+    index: number,
+    context: SheetStore
+  }
+
+  let { index, context }: props = $props();
 
   let showPopover = $state(false);
   let anchor; // referência ao botão clicado
-  let popoverStyle = $state("");
 
   function togglePopover(event: any) {
     anchor = event.currentTarget;
     showPopover = !showPopover;
   }
 
-  // TODO: implementar o insert after
+  function addNode(nodeType: NodeType) {
+    context.AddNodeInCurrentTab(nodeType, index);
+  }
 </script>
 
 <button class="add-btn">
@@ -32,10 +41,19 @@
   anchor={anchor}
 >
   {#snippet body()}
-    <div style={popoverStyle}>
-      <p>Snippet dinâmico {index}</p>
-      <button onclick={() => alert("Ação!")}>Ação</button>
-    </div>
+    <h5>Adicionar</h5>
+    <hr />
+    <section class="options-section">
+      <Button 
+        class="transparent align-start" 
+        on:click={() => addNode(NodeType.title)}
+      >
+        Titulo
+      </Button>
+      <Button class="transparent align-start">Texto</Button>
+      <Button class="transparent align-start">Atributo</Button>
+      <Button class="transparent align-start">Botão de Rolagem</Button>
+    </section>  
   {/snippet}
 </Popover>
 
@@ -44,5 +62,14 @@
     background-color: transparent;
     border: 0;
     cursor: pointer;
+  }
+  h5{
+    margin: 0;
+  }
+
+  .options-section{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 </style>

@@ -3,13 +3,15 @@
   import type { SheetNode } from "./model/sheetNode";
   import NodeFactory from "./node-render/nodeFactory.svelte";
   import AddNodeBtn from "./addNodeBtn.svelte";
+  import type { SheetStore } from "./stores/sheetStore.svelte";
 
   type props = {
+    context: SheetStore,
     content: SheetNode[],
     sheet: Sheet
   };
 
-  let { content, sheet }: props = $props();
+  let { context, content, sheet }: props = $props();
   let currentIndex = $state(-2);
 </script>
 
@@ -22,7 +24,11 @@
     role="button"
   >
     {#if currentIndex === -1}
-      <AddNodeBtn index={-1}></AddNodeBtn>
+      <AddNodeBtn 
+        index={-1}
+        {context}
+      >
+      </AddNodeBtn>
     {/if}
   </div>
   
@@ -36,7 +42,11 @@
       role="button"
     >
       {#if currentIndex === i}
-        <AddNodeBtn index={i}></AddNodeBtn>
+        <AddNodeBtn 
+          index={i}
+          {context}
+        >
+        </AddNodeBtn>
       {/if}
     </div>
   {/each}

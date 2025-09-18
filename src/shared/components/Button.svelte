@@ -75,4 +75,19 @@
     color: var(--red);
   }
 
+  .transparent{
+    background-color: transparent;
+    border: 0;
+    color: var(--white);
+  }
+  .transparent:hover{
+    background-color: var(--light-black);
+  }
+
+  .align-start{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+  }
+
 </style>

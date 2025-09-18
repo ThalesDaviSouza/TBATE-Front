@@ -44,10 +44,9 @@
   }
   .popover-content {
     position: absolute;
-    background: white;
-    border: 1px solid #ccc;
+    background: var(--black);
+    border: 1px solid var(--dark-gray);
     border-radius: 8px;
     padding: 0.75rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
 </style>
