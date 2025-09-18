@@ -8,6 +8,7 @@ export type SheetStore = {
   currentContent: SheetNode[],
   selectedTabId: number,
   AddNodeInCurrentTab: (type: NodeType, offset: number) => void
+  AddTab: () => void
 }
 
 export function CreateSheetStore(sheetInput: Sheet): SheetStore {
@@ -17,8 +18,11 @@ export function CreateSheetStore(sheetInput: Sheet): SheetStore {
 
   function AddNodeInCurrentTab(type: NodeType, offset: number){
     let node: SheetNode = nodeFactory(type);
-    
     sheet.tabs[selectedTabId].nodes.splice(offset+1, 0, node)
+  }
+
+  function AddTab(){
+    sheet.tabs.push({name:"Nova Tab", nodes: []})
   }
 
   return {
@@ -26,6 +30,7 @@ export function CreateSheetStore(sheetInput: Sheet): SheetStore {
     get currentContent() { return currentContent }, 
     get selectedTabId() { return selectedTabId }, 
     set selectedTabId(v: number) { selectedTabId = v },
-    AddNodeInCurrentTab
+    AddNodeInCurrentTab,
+    AddTab
   }
 }
