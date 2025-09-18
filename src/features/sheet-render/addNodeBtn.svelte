@@ -50,9 +50,24 @@
       >
         Titulo
       </Button>
-      <Button class="transparent align-start">Texto</Button>
-      <Button class="transparent align-start">Atributo</Button>
-      <Button class="transparent align-start">Botão de Rolagem</Button>
+      <Button 
+        class="transparent align-start"
+        on:click={() => addNode(NodeType.text)}
+      >
+        Texto
+      </Button>
+      <Button 
+        class="transparent align-start"
+        on:click={() => addNode(NodeType.modifier)}
+      >
+        Atributo
+      </Button>
+      <Button 
+        class="transparent align-start"
+        on:click={() => addNode(NodeType.rollBtn)}
+      >
+        Botão de Rolagem
+      </Button>
     </section>  
   {/snippet}
 </Popover>

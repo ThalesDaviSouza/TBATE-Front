@@ -1,25 +1,24 @@
 <script lang="ts">
-  import type { Tab } from "./model/tab";
-  import { selectedTabId } from "./stores/selectedTab.svelte";
+  import type { SheetStore } from "./stores/sheetStore.svelte";
 
   type props = {
-    tabs: Tab[]
+    context: SheetStore
   }
 
-  let { tabs }: props = $props();
+  let { context }: props = $props();
 </script>
 
 <div id="tab-wrapper">
-  {#each tabs as tab, id }
+  {#each context.sheet.tabs as tab, id }
     <div 
       class="tab"
-      class:active={id == selectedTabId.value}
+      class:active={id == context.selectedTabId}
       role="button"
       tabindex="0"
-      onclick={() => selectedTabId.value = id}
+      onclick={() => context.selectedTabId = id}
       onkeydown={(e) => {
         if(e.key == 'Enter' || e.key == ' '){
-          selectedTabId.value = id
+          context.selectedTabId = id
         }
       }}
     >
