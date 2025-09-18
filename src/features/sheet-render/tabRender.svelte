@@ -10,17 +10,49 @@
 
   let { context }: props = $props();
 
+  let dragIndex = $state(-1);
+
+  function handleDragStart(e: any, id: number){
+    dragIndex = id;
+    e.dataTransfer.effectAllowed = "move";
+  }
+
+  function handleDragOver(e: any){
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  }
+
+  function handleDrop(e: Event, id: number){
+    e.preventDefault();
+
+    if(dragIndex == null)
+      return;
+
+    const [moved] = context.sheet.tabs.splice(dragIndex, 1);
+    context.sheet.tabs.splice(id, 0, moved);
+    context.selectedTabId = id;
+  }
   
 </script>
 
 <div id="tab-wrapper">
   {#each context.sheet.tabs as tab, id }
-    <Tab
-      {context}
-      {tab}
-      {id}
+    <div
+      role="button"
+      tabindex="0"
+      class="draggable"
+      draggable="true"
+      ondragstart={(e) => handleDragStart(e, id)}
+      ondragover={handleDragOver}
+      ondrop={(e) => handleDrop(e, id)}
     >
+      <Tab
+        {context}
+        {tab}
+        {id}
+      >
     </Tab>
+  </div>
   {/each}
 
   <div class="add-tab">
@@ -57,5 +89,12 @@
   }
   .add-tab:hover .add-tab-btn{
     visibility: visible;
+  }
+
+  .draggable {
+    cursor: grab;
+  }
+  .draggable:active {
+    cursor: grabbing;
   }
 </style>
