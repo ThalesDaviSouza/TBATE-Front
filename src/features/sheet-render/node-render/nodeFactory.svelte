@@ -57,12 +57,12 @@
   isOpen={showPopover}
   onClose={() => showPopover = false}
 >
-{#snippet body()}
-  <Button 
-    class="transparent color-red align-start"
-    on:click={deleteNode}
-  >
-    Deletar
-  </Button>
-{/snippet}
+  {#snippet body()}
+    <Button 
+      class="transparent color-red align-start"
+      on:click={deleteNode}
+    >
+      Deletar
+    </Button>
+  {/snippet}
 </Popover>

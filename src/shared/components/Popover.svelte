@@ -16,8 +16,8 @@
     }
   }
 
-  let rect = $derived(anchor.getBoundingClientRect());
-  let popoverStyle = $derived(`top:${rect.bottom - rect.height/2}px;left:${rect.left + rect.width - 10}px;position:absolute;`);
+  let rect = $derived(anchor ? anchor.getBoundingClientRect() : null);
+  let popoverStyle = $derived(rect ?`top:${rect.bottom - rect.height/2}px;left:${rect.left + rect.width - 10}px;position:absolute;` : '');
 
  
 </script>

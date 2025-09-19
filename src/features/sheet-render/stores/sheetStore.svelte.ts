@@ -1,7 +1,8 @@
 import type { NodeType } from "../model/nodeType";
 import type { Sheet } from "../model/sheet";
 import type { SheetNode } from "../model/sheetNode";
-import { nodeFactory } from "../services/nodeFactory";
+import { SheetNodeService } from "../services/sheetNodeService";
+import { SheetTabService } from "../services/sheetTabService";
 
 export type SheetStore = {
   sheet: Sheet,
@@ -14,28 +15,27 @@ export type SheetStore = {
 }
 
 export function CreateSheetStore(sheetInput: Sheet): SheetStore {
+  let sheetTabService = new SheetTabService();
+  let sheetNodeService = new SheetNodeService();
+  
   let selectedTabId = $state(0);
   let sheet = $state(sheetInput);
   let currentContent = $derived(sheet.tabs[selectedTabId].nodes); 
 
   function AddNodeInCurrentTab(type: NodeType, offset: number){
-    let node: SheetNode = nodeFactory(type);
-    sheet.tabs[selectedTabId].nodes.splice(offset+1, 0, node)
+    sheetTabService.AddNode(sheet, selectedTabId, type, offset);
   }
 
   function AddTab(){
-    sheet.tabs.push({name:"Nova Tab", nodes: []})
+    sheetTabService.AddTab(sheet);
   }
   
   function RemoveTab(tabIndex: number){
-    if(sheet.tabs.length == 1){
-      throw new Error('Não pode ter menos de 1 tab na ficha')
-    }
-    sheet.tabs.splice(tabIndex, 1);
+    sheetTabService.RemoveTab(sheet, tabIndex);
   }
   
   function RemoveNode(selectedTabId: number, nodeId: number){
-    sheet.tabs[selectedTabId].nodes.splice(nodeId, 1);
+    sheetNodeService.RemoveNode(sheet.tabs[selectedTabId], nodeId);
   }
 
   return {
