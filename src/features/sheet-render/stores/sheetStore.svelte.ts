@@ -9,7 +9,8 @@ export type SheetStore = {
   selectedTabId: number,
   AddNodeInCurrentTab: (type: NodeType, offset: number) => void
   AddTab: () => void
-  RemoveTab: (tabIndex: number) => void
+  RemoveTab: (tabIndex: number) => void,
+  RemoveNode: (selectedTabId: number, nodeId: number) => void
 }
 
 export function CreateSheetStore(sheetInput: Sheet): SheetStore {
@@ -32,6 +33,10 @@ export function CreateSheetStore(sheetInput: Sheet): SheetStore {
     }
     sheet.tabs.splice(tabIndex, 1);
   }
+  
+  function RemoveNode(selectedTabId: number, nodeId: number){
+    sheet.tabs[selectedTabId].nodes.splice(nodeId, 1);
+  }
 
   return {
     sheet,
@@ -40,6 +45,7 @@ export function CreateSheetStore(sheetInput: Sheet): SheetStore {
     set selectedTabId(v: number) { selectedTabId = v },
     AddNodeInCurrentTab,
     AddTab,
-    RemoveTab
+    RemoveTab,
+    RemoveNode
   }
 }

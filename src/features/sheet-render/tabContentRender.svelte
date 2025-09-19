@@ -33,7 +33,14 @@
   </div>
   
   {#each content as node, i}
-    <NodeFactory {node} {sheet}></NodeFactory>
+    <NodeFactory 
+      {context} 
+      {node} 
+      {sheet} 
+      id={i}
+    >
+    </NodeFactory>
+    
     <div 
       class="add-container"
       onmouseenter={() => currentIndex = i}
