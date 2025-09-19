@@ -24,13 +24,7 @@
 
   function handleDrop(e: Event, id: number){
     e.preventDefault();
-
-    if(dragIndex == null)
-      return;
-
-    const [moved] = context.sheet.tabs.splice(dragIndex, 1);
-    context.sheet.tabs.splice(id, 0, moved);
-    context.selectedTabId = id;
+    context.DragAndDropTab(dragIndex, id);
   }
   
 </script>

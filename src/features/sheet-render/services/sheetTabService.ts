@@ -20,6 +20,11 @@ export class SheetTabService {
     }
     sheet.tabs.splice(tabIndex, 1);
   }
+
+  ChangeTabPosition(sheet: Sheet, oldId: number, newId: number){
+    const [moved] = sheet.tabs.splice(oldId, 1);
+    sheet.tabs.splice(newId, 0, moved);
+  }
 }
 
 

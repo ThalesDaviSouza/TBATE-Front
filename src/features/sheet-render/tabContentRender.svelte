@@ -13,6 +13,22 @@
 
   let { context, content, sheet }: props = $props();
   let currentIndex = $state(-2);
+  let dragIndex = $state(-1);
+
+  function handleDragStart(e: any, id: number){
+    dragIndex = id;
+    e.dataTransfer.effectAllowed = "move";
+  }
+
+  function handleDragOver(e: any){
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  }
+
+  function handleDrop(e: Event, id: number){
+    e.preventDefault();
+    context.DragAndDropNode(dragIndex, id);
+  }
 </script>
 
 <div>
@@ -33,28 +49,38 @@
   </div>
   
   {#each content as node, i}
-    <NodeFactory 
-      {context} 
-      {node} 
-      {sheet} 
-      id={i}
-    >
-    </NodeFactory>
-    
-    <div 
-      class="add-container"
-      onmouseenter={() => currentIndex = i}
-      onmouseleave={() => currentIndex = -2}
-      tabindex="0"
+    <div
       role="button"
+      tabindex="0"
+      class="draggable"
+      draggable="true"
+      ondragstart={(e) => handleDragStart(e, i)}
+      ondragover={handleDragOver}
+      ondrop={(e) => handleDrop(e, i)}
     >
-      {#if currentIndex === i}
-        <AddNodeBtn 
-          index={i}
-          {context}
-        >
-        </AddNodeBtn>
-      {/if}
+      <NodeFactory 
+        {context} 
+        {node} 
+        {sheet} 
+        id={i}
+      >
+      </NodeFactory>
+      
+      <div 
+        class="add-container"
+        onmouseenter={() => currentIndex = i}
+        onmouseleave={() => currentIndex = -2}
+        tabindex="0"
+        role="button"
+      >
+        {#if currentIndex === i}
+          <AddNodeBtn 
+            index={i}
+            {context}
+          >
+          </AddNodeBtn>
+        {/if}
+      </div>
     </div>
   {/each}
 </div>
@@ -65,6 +91,7 @@
     flex-direction: column;
     gap: 5px;
     align-items: baseline;
+    width: 100%;
   }
   .add-container{
     position: relative;
@@ -72,5 +99,9 @@
     height: 16px;
     justify-content: center;
     align-items: center;
+  }
+
+  .draggable{
+    width: 100%;
   }
 </style>
