@@ -22,6 +22,7 @@
 
   function addNode(nodeType: NodeType) {
     context.AddNodeInCurrentTab(nodeType, index);
+    showPopover = false;
   }
 </script>
 
@@ -67,6 +68,12 @@
         on:click={() => addNode(NodeType.rollBtn)}
       >
         Botão de Rolagem
+      </Button>
+      <Button 
+        class="transparent align-start"
+        on:click={() => addNode(NodeType.resourceBar)}
+      >
+        Barra de Recurso
       </Button>
     </section>  
   {/snippet}

@@ -1,6 +1,7 @@
 import { NodeType } from "../model/nodeType";
 import type { SheetNode } from "../model/sheetNode";
 import { NodeModifierStrategy } from "./nodeStrategies/nodeModifierStrategy";
+import { NodeResourceBarStrategy } from "./nodeStrategies/nodeResourceBarStrategy";
 import { NodeRollBtnStrategy } from "./nodeStrategies/nodeRollBtnStrategy";
 import type { NodeStrategy } from "./nodeStrategies/nodeStrategy";
 import { NodeTextStrategy } from "./nodeStrategies/nodeTextStrategy";
@@ -24,6 +25,10 @@ export function nodeFactory(type: NodeType): SheetNode{
     
     case NodeType.rollBtn:
       strategy = new NodeRollBtnStrategy();
+      break;
+    
+    case NodeType.resourceBar:
+      strategy = new NodeResourceBarStrategy();
       break;
     
     default:
