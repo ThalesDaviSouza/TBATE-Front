@@ -7,7 +7,7 @@ export class NodeRollBtnStrategy implements NodeStrategy{
     return {
       name: 'Nome',
       type: NodeType.rollBtn,
-      value: ""
+      rollFormula: ""
     };
   }
 }

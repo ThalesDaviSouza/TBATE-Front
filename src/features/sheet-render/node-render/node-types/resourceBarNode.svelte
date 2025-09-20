@@ -1,20 +1,20 @@
 <script lang="ts">
   import Icon from "@iconify/svelte";
-  import type { SheetNode } from "../../model/sheetNode";
   import Button from "../../../../shared/components/Button.svelte";
+  import type { ResourceBarNode } from "../../model/sheetNode";
 
   type props = {
-    node: SheetNode
+    node: ResourceBarNode
   };
 
   let { node }: props = $props();
-  let percent = $derived((parseInt(node.value) / node.maxValue!)*100)
+  let percent = $derived((node.value / node.maxValue!)*100)
 
   function decreaseActual(){
-    node.value = (parseInt(node.value)-1).toString()
+    node.value--;
   }
   function increaseActual(){
-    node.value = (parseInt(node.value)+1).toString()
+    node.value++;
   }
 
 </script>

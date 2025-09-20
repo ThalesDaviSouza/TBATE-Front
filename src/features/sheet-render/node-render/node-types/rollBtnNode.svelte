@@ -1,13 +1,13 @@
 <script lang="ts">
   import { writable } from "svelte/store";
   import Modal from "../../../../shared/components/Modal.svelte";
-  import type { SheetNode } from "../../model/sheetNode";
+  import type { RollBtnNode } from "../../model/sheetNode";
   import { ReadFormula } from "../../../../shared/services/RollFormulaInterpreter/rollFormulaInterpreter";
   import type { Sheet } from "../../model/sheet";
   import Icon from "@iconify/svelte";
 
   type props = {
-    node: SheetNode,
+    node: RollBtnNode,
     sheet: Sheet
   };
 
@@ -16,12 +16,12 @@
 </script>
 
 <div id="modifier-wrapper"
-  onclick={() => ReadFormula(node.value, sheet)}
+  onclick={() => ReadFormula(node.rollFormula, sheet)}
   tabindex="0"
   role="button"
   onkeydown={(e) => {
     if(e.key == 'enter' || e.key == ' ')
-      ReadFormula(node.value, sheet)
+      ReadFormula(node.rollFormula, sheet)
   }}
 >
   <span 
@@ -45,7 +45,7 @@
   >
   </p>
   <span class="roll-display">
-    {node.value}
+    {node.rollFormula}
   </span>
 </div>
 
@@ -54,10 +54,10 @@
     <span>Definir a formula:</span>
   {/snippet}
   {#snippet body()}
-    <input type="text" bind:value={node.value}>
+    <input type="text" bind:value={node.rollFormula}>
   {/snippet}
   {#snippet footer()}
-    <button onclick={() => ReadFormula(node.value, sheet)}>Teste</button>
+    <button onclick={() => ReadFormula(node.rollFormula, sheet)}>Teste</button>
   {/snippet}
 </Modal>
 

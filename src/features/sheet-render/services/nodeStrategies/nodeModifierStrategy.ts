@@ -7,7 +7,7 @@ export class NodeModifierStrategy implements NodeStrategy{
     return {
       name: 'Atributo',
       type: NodeType.modifier,
-      value: "0"
+      value: 0
     };
   }
 }

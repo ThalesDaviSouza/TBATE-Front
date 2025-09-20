@@ -7,7 +7,7 @@ export class NodeResourceBarStrategy implements NodeStrategy{
     return {
       name: 'Recurso',
       type: NodeType.resourceBar,
-      value: "50",
+      value: 50,
       maxValue: 100
     };
   }

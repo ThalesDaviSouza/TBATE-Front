@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { SheetNode } from "../../model/sheetNode";
+  import type { TextNode } from "../../model/sheetNode";
 
   type props = {
-    node: SheetNode
+    node: TextNode
   };
 
   let { node }: props = $props();
