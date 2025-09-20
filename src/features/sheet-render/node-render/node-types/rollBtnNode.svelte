@@ -11,7 +11,7 @@
     sheet: Sheet
   };
 
-  let { node, sheet }: props = $props();
+  let { node = $bindable(), sheet }: props = $props();
   let showModal = writable(false);
 </script>
 

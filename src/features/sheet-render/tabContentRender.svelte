@@ -11,7 +11,7 @@
     sheet: Sheet
   };
 
-  let { context, content, sheet }: props = $props();
+  let { context, content = $bindable(), sheet }: props = $props();
   let currentIndex = $state(-2);
   let dragIndex = $state(-1);
 
@@ -60,7 +60,7 @@
     >
       <NodeFactory 
         {context} 
-        {node} 
+        bind:node={content[i]} 
         {sheet} 
         id={i}
       >

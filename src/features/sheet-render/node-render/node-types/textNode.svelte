@@ -5,7 +5,7 @@
     node: TextNode
   };
 
-  let { node }: props = $props();
+  let { node = $bindable() }: props = $props();
 
 </script>
 

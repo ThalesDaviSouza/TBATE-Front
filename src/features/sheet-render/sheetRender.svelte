@@ -25,7 +25,7 @@
   ></TabRender>
   <TabContentRender 
     context={sheetStore}
-    content={sheetStore.currentContent} 
+    bind:content={sheetStore.currentContent} 
     sheet={sheetStore.sheet}
   >
   </TabContentRender>

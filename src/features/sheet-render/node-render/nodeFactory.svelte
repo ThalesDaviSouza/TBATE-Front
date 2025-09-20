@@ -18,7 +18,7 @@
     id: number
   };
 
-  let { context, node, sheet, id }: props = $props();
+  let { context, node = $bindable(), sheet, id }: props = $props();
 
   let showPopover = $state(false);
   let anchor = $state();
@@ -41,15 +41,15 @@
   bind:this={anchor}
 >
   {#if node.type == NodeType.text}
-    <TextNode {node}></TextNode>
+    <TextNode bind:node={node}></TextNode>
   {:else if node.type == NodeType.modifier}
-    <ModifierNode {node}></ModifierNode>
+    <ModifierNode bind:node={node}></ModifierNode>
   {:else if node.type == NodeType.title}
-    <TitleNode {node}></TitleNode>
+    <TitleNode bind:node={node}></TitleNode>
   {:else if node.type == NodeType.rollBtn}
-    <RollBtnNode {node} {sheet}></RollBtnNode>
+    <RollBtnNode bind:node={node} {sheet}></RollBtnNode>
   {:else if node.type == NodeType.resourceBar}
-    <ResourceBarNode {node}></ResourceBarNode>
+    <ResourceBarNode bind:node={node}></ResourceBarNode>
   {:else}
     <p>Tipo de nó não implementado</p>
   {/if}

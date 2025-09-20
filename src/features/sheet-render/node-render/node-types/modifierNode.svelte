@@ -5,7 +5,7 @@
     node: ModifierNode
   };
 
-  let { node }: props = $props();
+  let { node = $bindable() }: props = $props();
 
 </script>
 

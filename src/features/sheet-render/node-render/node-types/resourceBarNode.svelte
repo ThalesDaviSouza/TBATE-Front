@@ -7,7 +7,7 @@
     node: ResourceBarNode
   };
 
-  let { node }: props = $props();
+  let { node = $bindable() }: props = $props();
   let percent = $derived((node.value / node.maxValue!)*100)
 
   function decreaseActual(){
