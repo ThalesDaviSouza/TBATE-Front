@@ -13,7 +13,9 @@ export type SheetStore = {
   RemoveTab: (tabIndex: number) => void,
   RemoveNode: (selectedTabId: number, nodeId: number) => void,
   DragAndDropTab: (dragIndex: number, newId: number) => void
-  DragAndDropNode: (dragIndex: number, newId: number) => void
+  DragAndDropNode: (dragIndex: number, newId: number) => void,
+  DeleteEffect: (nodeId:number, effectId: number) => void
+  DeleteAction: (nodeId:number, effectId: number, actionId: number) => void
 }
 
 export function CreateSheetStore(sheetInput: Sheet): SheetStore {
@@ -48,6 +50,14 @@ export function CreateSheetStore(sheetInput: Sheet): SheetStore {
   function DragAndDropNode(dragIndex: number, newId: number){
     sheetNodeService.ChangeNodePosition(sheet.tabs[selectedTabId], dragIndex, newId);
   }
+  
+  function DeleteEffect(nodeId:number, effectId: number){
+    sheetNodeService.DeleteEffect(sheet.tabs[selectedTabId], nodeId, effectId);
+  }
+  
+  function DeleteAction(nodeId:number, effectId: number, actionId: number){
+    sheetNodeService.DeleteAction(sheet.tabs[selectedTabId], nodeId, effectId, actionId);
+  }
 
   return {
     sheet,
@@ -59,6 +69,8 @@ export function CreateSheetStore(sheetInput: Sheet): SheetStore {
     RemoveTab,
     RemoveNode,
     DragAndDropTab,
-    DragAndDropNode
+    DragAndDropNode,
+    DeleteEffect,
+    DeleteAction
   }
 }

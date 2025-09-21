@@ -1,37 +1,37 @@
 <script lang="ts">
-  import { writable } from "svelte/store";
-  import Modal from "../../../../shared/components/Modal.svelte";
   import type { RollBtnNode } from "../../model/sheetNode";
   import { ReadFormula } from "../../../../shared/services/RollFormulaInterpreter/rollFormulaInterpreter";
-  import type { Sheet } from "../../model/sheet";
   import Icon from "@iconify/svelte";
+  import RollBtnModal from "../roll-btn-node/rollBtnModal.svelte";
+  import type { SheetStore } from "../../stores/sheetStore.svelte";
 
   type props = {
     node: RollBtnNode,
-    sheet: Sheet
+    nodeId: number,
+    context: SheetStore
   };
 
-  let { node = $bindable(), sheet }: props = $props();
-  let showModal = writable(false);
+  let { node = $bindable(), context, nodeId }: props = $props();
+  let showModal = $state(false);
 </script>
 
 <div id="modifier-wrapper"
-  onclick={() => ReadFormula(node.rollFormula, sheet)}
+  onclick={() => ReadFormula(node.rollFormula, context.sheet)}
   tabindex="0"
   role="button"
   onkeydown={(e) => {
     if(e.key == 'enter' || e.key == ' ')
-      ReadFormula(node.rollFormula, sheet)
+      ReadFormula(node.rollFormula, context.sheet)
   }}
 >
   <span 
     class="edit"
-    onclick={(e) => { showModal.set(true); e.stopPropagation(); }}
+    onclick={(e) => { showModal = true; e.stopPropagation(); }}
     tabindex="0"
     role="button"
     onkeydown={(e) => {
       if(e.key == 'enter' || e.key == ' ')
-        showModal.set(true)
+        showModal = true;
     }}
   >
     <Icon icon="iconoir:edit-pencil"/>
@@ -49,17 +49,14 @@
   </span>
 </div>
 
-<Modal showModal={showModal}>
-  {#snippet header()}
-    <span>Definir a formula:</span>
-  {/snippet}
-  {#snippet body()}
-    <input type="text" bind:value={node.rollFormula}>
-  {/snippet}
-  {#snippet footer()}
-    <button onclick={() => ReadFormula(node.rollFormula, sheet)}>Teste</button>
-  {/snippet}
-</Modal>
+<RollBtnModal 
+  bind:node={node} 
+  {showModal} 
+  {context}
+  {nodeId}
+>
+</RollBtnModal>
+
 
 <style>  
   #modifier-wrapper{
@@ -81,11 +78,6 @@
   #modifier-wrapper:hover{
     background-color: var(--black-bg);
     border: 1px solid var(--light-black);
-  }
-
-  input {
-    text-align: center;
-    width: auto;
   }
 
   .edit {

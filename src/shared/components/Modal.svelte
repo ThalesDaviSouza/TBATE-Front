@@ -1,23 +1,22 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import type { Writable } from "svelte/store";
 
   type Props = {
     header?: Snippet,
     body?: Snippet,
     footer?: Snippet,
-    showModal: Writable<boolean>
+    showModal: boolean
   }
 
   let { header, body, footer, showModal }: Props = $props();
 
   function closeModal() {
-    showModal.set(!showModal);
+    showModal = !showModal;
   }
 
 </script>
 
-{#if $showModal}
+{#if showModal}
   <div 
     class="overlay" 
     onclick={closeModal}

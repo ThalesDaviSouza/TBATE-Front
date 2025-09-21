@@ -14,11 +14,10 @@
   type props = {
     context: SheetStore,
     node: SheetNode,
-    sheet: Sheet,
     id: number
   };
 
-  let { context, node = $bindable(), sheet, id }: props = $props();
+  let { context, node = $bindable(), id }: props = $props();
 
   let showPopover = $state(false);
   let anchor = $state();
@@ -47,7 +46,7 @@
   {:else if node.type == NodeType.title}
     <TitleNode bind:node={node}></TitleNode>
   {:else if node.type == NodeType.rollBtn}
-    <RollBtnNode bind:node={node} {sheet}></RollBtnNode>
+    <RollBtnNode bind:node={node} {context} nodeId={id}></RollBtnNode>
   {:else if node.type == NodeType.resourceBar}
     <ResourceBarNode bind:node={node}></ResourceBarNode>
   {:else}

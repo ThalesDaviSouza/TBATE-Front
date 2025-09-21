@@ -1,3 +1,4 @@
+import type { Effect } from "./effect"
 import type { NodeType } from "./nodeType"
 
 export type TitleNode = {
@@ -19,7 +20,8 @@ export type ModifierNode = {
 export type RollBtnNode = {
   name: string,
   type: NodeType.rollBtn,
-  rollFormula: string
+  rollFormula: string,
+  effects: Effect[]
 }
 
 export type ResourceBarNode = {

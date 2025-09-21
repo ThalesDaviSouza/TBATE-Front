@@ -61,7 +61,6 @@
       <NodeFactory 
         {context} 
         bind:node={content[i]} 
-        {sheet} 
         id={i}
       >
       </NodeFactory>
